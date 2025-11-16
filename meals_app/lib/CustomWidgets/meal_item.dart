@@ -4,9 +4,14 @@ import 'package:meals_app/views/meals_detail_screen.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class MealItem extends StatelessWidget {
-  const MealItem({super.key, required this.meal});
+  const MealItem({
+    super.key,
+    required this.meal,
+    required this.onToggleFavorite,
+  });
 
   final MealModel meal;
+  final void Function(MealModel meal) onToggleFavorite;
 
   String get complexityText {
     return meal.complexity.name[0].toUpperCase() +
@@ -32,7 +37,10 @@ class MealItem extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (ctx) => MealsDetailScreen(meal: meal),
+              builder: (ctx) => MealsDetailScreen(
+                meal: meal,
+                onToggleFavorite: onToggleFavorite,
+              ),
             ),
           );
         },
